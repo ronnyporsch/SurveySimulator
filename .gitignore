@@ -10,6 +10,7 @@ build/
 .idea/compiler.xml
 .idea/libraries/
 .idea/workspace.xml
+.idea/misc.xml
 *.iws
 *.iml
 *.ipr
@@ -41,3 +42,4 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+/.idea/uiDesigner.xml
