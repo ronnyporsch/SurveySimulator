@@ -80,6 +80,8 @@ public String getMessage() {
   - **Solution:** Make sure you have Java installed and added it to the environment variables
 - **Error:** "Can't read config file" or "FileNotFoundException"
   - **Solution:** Make sure that your .jar File as well as both the config.properties and the questions.txt files are in the same directory   
+- **Error:** "java.io.IOException: server response code 401"
+  - **Solution:** Make sure that the config.properties file contains a correct OpenAI API key
 
 ## Possible future improvements
 - currently errors from ChatGPT are not being handled (for example when calling the api with insufficient credits)
