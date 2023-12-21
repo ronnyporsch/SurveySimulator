@@ -11,6 +11,6 @@ public class Utility {
      */
     @SneakyThrows(URISyntaxException.class)
     public static File getDirectoryOfExecutable() {
-        return new File(Utility.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile(); //when the jar is in the same folder as the input files
+        return new File(Utility.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile();
     }
 }
