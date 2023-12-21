@@ -2,12 +2,24 @@
 ## How to use
 1. Install [Java](https://openjdk.org/)
 2. Add Java to the environment variables ([Tutorial for Windows](https://www.onlinetutorialspoint.com/java8/java-8-how-to-set-java_home-on-windows10.html))
-3. Download the latest release of the [SurveySimulator](https://github.com/ronnyporsch/SurveySimulator/releases/latest)
+3. Download the latest release's Executables.zip of the [SurveySimulator](https://github.com/ronnyporsch/SurveySimulator/releases/latest)
 4. Unzip the files (using a tool such as [7-Zip](https://www.7-zip.org/))
 5. Put your survey questions into the questions.txt using the same syntax as the example questions
-6. Put your own OpenAI API key into the config.properties, while making sure that you have sufficient credits on your account
-7. Open a command line in the directory of the downloaded files and start the program using the following command: ``java -jar .\SurveySimulator.jar``
-8. You can find the filled out surveys as separate files in the output folder
+6. [Set up an OpenAI API key](#creating-an-openai-api-key) 
+7. Put your own OpenAI API key into the config.properties, while making sure that you have sufficient credits on your account
+8. Start the program using the executable file that is applicable to your operating system (.exe for Windows, )
+9. You can find the filled out surveys as separate files in the output folder
+
+## Setting up an OpenAI API Key
+1. Create an account on [OpenAI.com](https://platform.openai.com/)
+2. Go to the [API Keys page](https://platform.openai.com/api-keys) and click on "Create new secret key"
+3. (Optional) Set a name for your key
+4. Copy the key that will be generated for you. Save it into a text file for later use
+5. Go to the [Billing settings page](https://platform.openai.com/account/billing/overview) and click on "Add to credit balance"
+6. Add a payment method and specify an amount to add to your balance (yes, this will cost real money)
+7. Click on "Continue"
+8. Review your Payment and click on "Confirm Payment"
+9. OpenAI might take a few minutes to process your payment. Wait for that to happen 
 
 ## Config
 - Use the config.properties file to configure the program:
