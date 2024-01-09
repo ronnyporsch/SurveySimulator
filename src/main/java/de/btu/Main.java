@@ -4,34 +4,34 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Main {
 
     private static ChatGPTManager chatGPTManager;
+    private static final String[] participants = Config.PARTICIPANTS;
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public static void main(String[] args) throws IOException {
         chatGPTManager = new ChatGPTManager(Config.API_KEY);
         List<String> questions = TxtFileManager.readQuestionsFromFile();
-        for (int i = 0; i < Config.NUMBER_OF_FILLED_OUT_SURVEYS; i++) {
-            Map<String, String> filledOutSurvey = querySurveyAnswers(questions);
-            TxtFileManager.createFileAndWriteString(gson.toJson(filledOutSurvey), "survey_answers" + i + ".txt");
+        for (String participant : participants) {
+            List<SurveyResult> filledOutSurvey = querySurveyAnswers(questions, participant);
+            TxtFileManager.createFileAndWriteString(gson.toJson(filledOutSurvey), "survey_answers_" + participant + ".txt");
         }
     }
 
     /**
      * takes a list of questions, sending each of them as a prompt to ChatGPT
      * @param questions list of questions
-     * @return Map with questions as keys and their answers as the respective values
+     * @param participant the participant that is simulated to ask the question
+     * @return list of SurveyResults
      */
-    private static Map<String, String> querySurveyAnswers(List<String> questions) {
-        Map<String, String> filledOutSurvey = new HashMap<>();
+    private static List<SurveyResult> querySurveyAnswers(List<String> questions, String participant) {
+        List<SurveyResult> filledOutSurvey = new LinkedList<>();
         for (String question : questions) {
             try {
-                filledOutSurvey.put(question, chatGPTManager.ask(question));
+                filledOutSurvey.add(new SurveyResult(question, chatGPTManager.ask(question, participant), participant));
             } catch (IOException e) {
                 e.printStackTrace();
             }

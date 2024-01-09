@@ -2,11 +2,15 @@
 
 ## Table of contents
 
+- [Introduction](#introduction)
 - [How to use](#how-to-use)
   - [Setting up an OpenAI API Key](#setting-up-an-openai-api-key)
   - [Configuration](#configuration)
   - [Troubleshooting](#troubleshooting)
 - [How it works internally](#how-it-works-internally)
+
+## Introduction
+This guide explains how to use ChatGPT to simulate surveys. You set your own questions and define what kind of participants ChatGPT should impersonate. 
 
 ## How to use
 1. Download and install [Java](https://www.java.com/en/download/)
@@ -36,11 +40,12 @@
 API_KEY = PUT_YOUR_API_KEY_HERE
 USED_MODEL = gpt-3.5-turbo
 NUMBER_OF_FILLED_OUT_SURVEYS = 1
+PARTICIPANTS = Donald Duck,Obama,a 13 year old boy with a skateboard
 ```
 - Edit this file to configure the program:
   - API_KEY: Your OpenAI API Key
-  - USED_MODEL: The model that is being queried (see [here](https://platform.openai.com/docs/models) for an overview of available models)
-  - NUMBER_OF_FILLED_OUT_SURVEYS: The number of times ChatGPT is supposed to answer the survey. Each set of answers will be saved into a separate file
+  - USED_MODEL: The model that is being queried (see [here](https://platform.openai.com/docs/models) for an overview of available models) 
+  - PARTICIPANTS: participants that should be simulated. Divided by commas. Each set of answers will be saved into a separate file
 
 ### Troubleshooting
 - **Error:** "'Java'" is not recognized as an internal or external command, operable program or batch file."
