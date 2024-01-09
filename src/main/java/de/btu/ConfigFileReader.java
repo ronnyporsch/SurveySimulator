@@ -11,7 +11,7 @@ import java.io.File;
 
 public class ConfigFileReader {
     private static Configuration config;
-    private static final File configFile = new File(Utility.getDirectoryOfExecutable(), "config.properties");
+    private static final File configFile = new File(Utility.getDirectoryOfExecutable(), "config.txt");
 
     private static Configuration readConfigFile() throws ConfigurationException {
         System.out.println("reading config from " + ConfigFileReader.configFile.getAbsolutePath());

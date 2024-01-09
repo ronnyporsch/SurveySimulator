@@ -5,7 +5,7 @@ import com.google.common.io.Files;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class TxtFileManager {
@@ -20,7 +20,7 @@ public class TxtFileManager {
         file.getParentFile().mkdir();
         if (file.createNewFile())
             System.out.println("file " + file.getName() + " created!");
-        java.nio.file.Files.writeString(Path.of(file.getPath()), text);
+        java.nio.file.Files.write(Paths.get(file.getPath()), text.getBytes());
         System.out.println("your file can be found here: " + file.getPath());
     }
 }

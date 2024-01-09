@@ -1,16 +1,25 @@
 # Simulating Surveys with ChatGPT
-## How to use
-1. Install [Java](https://openjdk.org/)
-2. Add Java to the environment variables ([Tutorial for Windows](https://www.onlinetutorialspoint.com/java8/java-8-how-to-set-java_home-on-windows10.html))
-3. Download the latest release's Executables.zip of the [SurveySimulator](https://github.com/ronnyporsch/SurveySimulator/releases/latest)
-4. Unzip the files (using a tool such as [7-Zip](https://www.7-zip.org/))
-5. Put your survey questions into the questions.txt using the same syntax as the example questions
-6. [Set up an OpenAI API key](#creating-an-openai-api-key) 
-7. Put your own OpenAI API key into the config.properties, while making sure that you have sufficient credits on your account
-8. Start the program using the executable file that is applicable to your operating system (.exe for Windows, )
-9. You can find the filled out surveys as separate files in the output folder
 
-## Setting up an OpenAI API Key
+## Table of contents
+
+- [How to use](#how-to-use)
+  - [Setting up an OpenAI API Key](#setting-up-an-openai-api-key)
+  - [Configuration](#configuration)
+  - [Troubleshooting](#troubleshooting)
+- [How it works internally](#how-it-works-internally)
+
+## How to use
+1. Download and install [Java](https://www.java.com/en/download/)
+2. Download the latest release's Executables.zip of the [SurveySimulator](https://github.com/ronnyporsch/SurveySimulator/releases/latest)
+3. Unzip the files (using a tool such as [7-Zip](https://www.7-zip.org/))
+4. Put your survey questions into the questions.txt using the same syntax as the example questions
+5. [Set up an OpenAI API key](#setting-up-an-openai-api-key) 
+6. Put your own OpenAI API key into the [config.txt](#configuration), while making sure that you have sufficient credits on your account
+7. Start the program with a double click on the .jar file. Alternatively, open a command line in the executables folder and type "java -jar SurveySimulator.jar" and then confirm by pressing Enter
+8. Wait for the program to complete the survey (this can take a few seconds depending on how many questions your survey consists of)
+9. You can find the filled out surveys in [JSON format](https://en.wikipedia.org/wiki/JSON) as separate files in the automatically created output folder
+
+### Setting up an OpenAI API Key
 1. Create an account on [OpenAI.com](https://platform.openai.com/)
 2. Go to the [API Keys page](https://platform.openai.com/api-keys) and click on "Create new secret key"
 3. (Optional) Set a name for your key
@@ -21,15 +30,29 @@
 8. Review your Payment and click on "Confirm Payment"
 9. OpenAI might take a few minutes to process your payment. Wait for that to happen 
 
-## Config
-- Use the config.properties file to configure the program:
+### Configuration
+- The program comes with a config.txt that looks like this:
+ ```
+API_KEY = PUT_YOUR_API_KEY_HERE
+USED_MODEL = gpt-3.5-turbo
+NUMBER_OF_FILLED_OUT_SURVEYS = 1
+```
+- Edit this file to configure the program:
   - API_KEY: Your OpenAI API Key
   - USED_MODEL: The model that is being queried (see [here](https://platform.openai.com/docs/models) for an overview of available models)
-  - NUMBER_OF_FILLED_OUT_SURVEYS: The number of times ChatGPT is supposed to answer the survey. Each set of answers will be saved into a separate JSON file
+  - NUMBER_OF_FILLED_OUT_SURVEYS: The number of times ChatGPT is supposed to answer the survey. Each set of answers will be saved into a separate file
+
+### Troubleshooting
+- **Error:** "'Java'" is not recognized as an internal or external command, operable program or batch file."
+  - **Solution:** Make sure you have Java installed
+- **Error:** "Can't read config file" or "FileNotFoundException"
+  - **Solution:** Make sure that your .jar File as well as both the config.properties and the questions.txt files are in the same directory
+- **Error:** "java.io.IOException: server response code 401"
+  - **Solution:** Make sure that the config.properties file contains a correct [OpenAI API key](#setting-up-an-openai-api-key)
 
 ## How it works internally
 - The program reads your survey questions from the questions.txt
-- Using your api key from the config.properties, each question will be sent to ChatGPT like this:
+- Using your api key from the config.txt, each question will be sent to ChatGPT like this:
 ```
     public String ask(String prompt) throws IOException {
         System.out.println("asking chatGPT: " + prompt);
@@ -86,14 +109,3 @@ public String getMessage() {
         System.out.println("your file can be found here: " + file.getPath());
     }
 ```
-
-## Troubleshooting
-- **Error:** "'Java'" is not recognized as an internal or external command, operable program or batch file."
-  - **Solution:** Make sure you have Java installed and added it to the environment variables
-- **Error:** "Can't read config file" or "FileNotFoundException"
-  - **Solution:** Make sure that your .jar File as well as both the config.properties and the questions.txt files are in the same directory   
-- **Error:** "java.io.IOException: server response code 401"
-  - **Solution:** Make sure that the config.properties file contains a correct OpenAI API key
-
-## Possible future improvements
-- currently errors from ChatGPT are not being handled (for example when calling the api with insufficient credits)

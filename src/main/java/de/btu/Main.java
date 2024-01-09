@@ -18,7 +18,7 @@ public class Main {
         List<String> questions = TxtFileManager.readQuestionsFromFile();
         for (int i = 0; i < Config.NUMBER_OF_FILLED_OUT_SURVEYS; i++) {
             Map<String, String> filledOutSurvey = querySurveyAnswers(questions);
-            TxtFileManager.createFileAndWriteString(gson.toJson(filledOutSurvey), "survey_answers" + i + ".json");
+            TxtFileManager.createFileAndWriteString(gson.toJson(filledOutSurvey), "survey_answers" + i + ".txt");
         }
     }
 
