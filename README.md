@@ -79,6 +79,7 @@ PARTICIPANTS = Donald Duck,Obama,a 13 year old boy with a skateboard
         return gson.fromJson(response.body().string(), ChatGPTAnswer.class).getMessage();
     }
 ```
+- When participants are declared in the config file, each prompt will be asked like this: ``"pretend that you are " + participant + " for next question:" + prompt;``
 - ChatGPT will answer with a structure as seen in the ChatGPTAnswer class. We use the Gson library to create an instance of that class for every response that we get
 - The important part of the answer for us is to be found in the message object. We retrieve it like this:
 ```
@@ -89,11 +90,11 @@ public String getMessage() {
 
 - We loop through all our questions, sending each as a separate prompt to ChatGPT, creating pairs of questions and their respective answers:
 ```
-    private static Map<String, String> querySurveyAnswers(List<String> questions) {
-        Map<String, String> filledOutSurvey = new HashMap<>();
+    private static List<SurveyResult> querySurveyAnswers(List<String> questions, String participant) {
+        List<SurveyResult> filledOutSurvey = new LinkedList<>();
         for (String question : questions) {
             try {
-                filledOutSurvey.put(question, chatGPTManager.ask(question));
+                filledOutSurvey.add(new SurveyResult(question, chatGPTManager.ask(question, participant), participant));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -101,15 +102,15 @@ public String getMessage() {
         return filledOutSurvey;
     }
 ```
-- Finally, we write our questions/answer pairs into a file, creating a new file for each iteration of the survey:
+- Finally, we write our questions/answer pairs into a file, creating a new file for each participant of the survey:
 ```
     public static void createFileAndWriteString(String text, String outputFileName) throws IOException {
-        File file = new File(Utility.getProjectRoot() 
+        File file = new File(Utility.getDirectoryOfExecutable()
                 + File.separator + "output" + File.separator + outputFileName);
         file.getParentFile().mkdir();
         if (file.createNewFile())
             System.out.println("file " + file.getName() + " created!");
-        java.nio.file.Files.writeString(Path.of(file.getPath()), text);
+        java.nio.file.Files.write(Paths.get(file.getPath()), text.getBytes());
         System.out.println("your file can be found here: " + file.getPath());
     }
 ```
