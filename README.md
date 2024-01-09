@@ -39,7 +39,6 @@ This guide explains how to use ChatGPT to simulate surveys. You set your own que
  ```
 API_KEY = PUT_YOUR_API_KEY_HERE
 USED_MODEL = gpt-3.5-turbo
-NUMBER_OF_FILLED_OUT_SURVEYS = 1
 PARTICIPANTS = Donald Duck,Obama,a 13 year old boy with a skateboard
 ```
 - Edit this file to configure the program:

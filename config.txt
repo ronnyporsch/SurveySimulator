@@ -1,4 +1,3 @@
 API_KEY = YOUR_KEY_HERE
 USED_MODEL = gpt-3.5-turbo
-NUMBER_OF_FILLED_OUT_SURVEYS = 1
 PARTICIPANTS = Donald Duck,Obama,a middle-aged man with a skateboard
